@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'books_cbv',
     'books_fbv',
     'books_fbv_user',
+    'books_pc_formset',
 ]
 
 MIDDLEWARE_CLASSES = [
