@@ -5,7 +5,7 @@ import books_simple.urls
 import books_pc_formset.urls
 import books_pc_formset2.urls
 import books_pc_multi_view.urls
-import apps.views
+import theme.views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -13,5 +13,5 @@ urlpatterns = [
     url(r'^books_pc_formset/', include(books_pc_formset.urls, namespace='books_pc_formset')),
     url(r'^books_pc_formset2/', include(books_pc_formset2.urls, namespace='books_pc_formset2')),
     url(r'^books_pc_multi_view/', include(books_pc_multi_view.urls, namespace='books_pc_multi_view')),
-    url(r'^$', apps.views.home, name='home'),
+    url(r'^$', theme.views.home, name='home'),
 ]
