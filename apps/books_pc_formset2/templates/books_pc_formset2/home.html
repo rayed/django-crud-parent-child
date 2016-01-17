@@ -1,0 +1,27 @@
+<h1>Books Parent/Child Formset2</h1>
+
+
+<h2>People</h2>
+<ul>
+    {% for person in persons %}
+    <li>{{ person.name }}  ({{ person.email }})
+    <a href="{% url 'books_pc_formset2:person_edit' person.id %}">edit</a>
+    <a href="{% url 'books_pc_formset2:person_delete' person.id %}">delete</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'books_pc_formset2:person_new' %}">New</a>
+
+
+<h2>Books</h2>
+<ul>
+    {% for book in books %}
+    <li>{{ book.name }}  ({{ book.pages }} Pages)
+    <a href="{% url 'books_pc_formset2:book_edit' book.id %}">edit</a>
+    <a href="{% url 'books_pc_formset2:book_delete' book.id %}">delete</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'books_pc_formset2:book_new' %}">New</a>

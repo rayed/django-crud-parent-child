@@ -1,0 +1,8 @@
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <strong>Contributors<strong>
+    <table>
+    {{ formset.as_table }}
+    </table>
+    <input type="submit" value="Submit" />
+</form>
