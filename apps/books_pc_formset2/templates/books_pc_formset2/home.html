@@ -1,3 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include "books_pc_formset2/nav.html" %}
+
 <h1>Books Parent/Child Formset2</h1>
 
 
@@ -25,3 +30,5 @@
 </ul>
 
 <a href="{% url 'books_pc_formset2:book_new' %}">New</a>
+
+{% endblock %}

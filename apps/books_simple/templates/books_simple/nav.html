@@ -1,0 +1,9 @@
+<h2>
+<a href="{% url 'books_simple:home' %}">Application Home</a>
+{% if book %}
+&gt; <a href="{% url 'books_simple:book_edit' book.id %}">{{ book }}</a>
+{% endif %}
+{% if title %}
+&gt; {{ title }}
+{% endif %}
+</h2>

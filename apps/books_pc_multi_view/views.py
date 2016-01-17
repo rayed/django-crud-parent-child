@@ -52,6 +52,7 @@ def book_update(request, pk, template_name='books_pc_multi_view/book_form.html')
         return redirect('books_pc_multi_view:home')
     ctx = {}
     ctx["form"] = form
+    ctx["book"] = book
     return render(request, template_name, ctx)
 
 def book_delete(request, pk, template_name='books_pc_multi_view/book_confirm_delete.html'):
@@ -61,6 +62,7 @@ def book_delete(request, pk, template_name='books_pc_multi_view/book_confirm_del
         return redirect('books_pc_multi_view:home')
     ctx = {}
     ctx["object"] = book
+    ctx["book"] = book
     return render(request, template_name, ctx)
 
 

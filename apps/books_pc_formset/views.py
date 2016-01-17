@@ -9,11 +9,11 @@ class BookForm(ModelForm):
         model = Book
         fields = ['name', 'pages']
 
-def book_list(request, template_name='books_pc_formset/book_list.html'):
-    book = Book.objects.all()
-    data = {}
-    data['object_list'] = book
-    return render(request, template_name, data)
+def home(request, template_name='books_pc_formset/home.html'):
+    books = Book.objects.all()
+    ctx = {}
+    ctx['books'] = books
+    return render(request, template_name, ctx)
 
 def book_create(request, template_name='books_pc_formset/book_form.html'):
     InlineFormSet = inlineformset_factory(Book, Tag, fields=('name', 'weight'))
@@ -24,12 +24,15 @@ def book_create(request, template_name='books_pc_formset/book_form.html'):
         formset.instance = book
         if formset.is_valid():
             formset.save()
-            return redirect('books_pc_formset:book_list')
-    return render(request, template_name, {'form':form, 'formset':formset})
+            return redirect('books_pc_formset:home')
+    ctx = {}
+    ctx['form'] = form
+    ctx['formset'] = formset
+    return render(request, template_name, ctx)
 
 def book_update(request, pk, template_name='books_pc_formset/book_form.html'):
     InlineFormSet = inlineformset_factory(Book, Tag, fields=('name', 'weight'))
-    book= get_object_or_404(Book, pk=pk)
+    book = get_object_or_404(Book, pk=pk)
     form = BookForm(request.POST or None, instance=book)
     formset = InlineFormSet(request.POST or None, instance=book)
     if form.is_valid():
@@ -37,12 +40,17 @@ def book_update(request, pk, template_name='books_pc_formset/book_form.html'):
         formset.instance = book
         if formset.is_valid():
             formset.save()
-            return redirect('books_pc_formset:book_list')
-    return render(request, template_name, {'form':form, 'formset':formset})
+            return redirect('books_pc_formset:home')
+    ctx = {}
+    ctx['form'] = form
+    ctx['formset'] = formset
+    return render(request, template_name, ctx)
 
 def book_delete(request, pk, template_name='books_pc_formset/book_confirm_delete.html'):
-    book= get_object_or_404(Book, pk=pk)    
+    book = get_object_or_404(Book, pk=pk)    
     if request.method=='POST':
         book.delete()
-        return redirect('books_pc_formset:book_list')
-    return render(request, template_name, {'object':book})
+        return redirect('books_pc_formset:home')
+    ctx = {}
+    ctx['book'] = book
+    return render(request, template_name, ctx)

@@ -39,9 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'theme',
-    'books_cbv',
-    'books_fbv',
-    'books_fbv_user',
+    'books_simple',
     'books_pc_formset',
     'books_pc_formset2',
     'books_pc_multi_view',

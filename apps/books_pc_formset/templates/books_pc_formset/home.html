@@ -1,6 +1,12 @@
-<h1>Books Parent/Child Formset</h1>
+{% extends "base.html" %}
+
+{% block content %}
+{% include "books_pc_formset/nav.html" %}
+
+Books Parent/Child Formset
+
 <ul>
-    {% for book in object_list %}
+    {% for book in books %}
     <li>{{ book.name }}  ({{ book.pages }} Pages)
     <a href="{% url 'books_pc_formset:book_edit' book.id %}">edit</a>
     <a href="{% url 'books_pc_formset:book_delete' book.id %}">delete</a>
@@ -9,3 +15,5 @@
 </ul>
 
 <a href="{% url 'books_pc_formset:book_new' %}">New</a>
+
+{% endblock %}

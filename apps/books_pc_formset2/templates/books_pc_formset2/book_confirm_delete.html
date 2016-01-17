@@ -1,4 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include "books_pc_formset2/nav.html" with book=book title="Delete" %}
+
 <form method="post">{% csrf_token %}
-    Are you sure you want to delete "{{ object }}" ?
+    Are you sure you want to delete "{{ book }}" ?
     <input type="submit" value="Submit" />
 </form>
+
+{% endblock %}

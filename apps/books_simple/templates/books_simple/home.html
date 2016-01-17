@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include "books_simple/nav.html" with book=book %}
+
+<ul>
+    {% for book in books %}
+    <li>{{ book.name }}  ({{ book.pages }} Pages)
+    <a href="{% url 'books_simple:book_edit' book.id %}">edit</a>
+    <a href="{% url 'books_simple:book_delete' book.id %}">delete</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'books_simple:book_new' %}">New</a>
+{% endblock %}
