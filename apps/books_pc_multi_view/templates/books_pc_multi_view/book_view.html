@@ -1,0 +1,18 @@
+<h1>{{ book.name }}</h1>
+
+Pages: {{ book.pages }}
+
+<h2>Reviews</h2>
+<ul>
+    {% for review in reviews %}
+    <li>
+        {{ review.name }}<br>
+        {{ review.review|linebreaks }}
+        <br>
+        <a href="{% url 'books_pc_multi_view:review_edit' review.id %}">edit</a>
+        <a href="{% url 'books_pc_multi_view:review_delete' review.id %}">delete</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'books_pc_multi_view:review_new' book.id %}">New Review</a>

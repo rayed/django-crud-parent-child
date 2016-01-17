@@ -6,6 +6,7 @@ import books_fbv.urls
 import books_fbv_user.urls
 import books_pc_formset.urls
 import books_pc_formset2.urls
+import books_pc_multi_view.urls
 import apps.views
 
 urlpatterns = [
@@ -15,5 +16,6 @@ urlpatterns = [
     url(r'^books_fbv_user/', include(books_fbv_user.urls, namespace='books_fbv_user')),
     url(r'^books_pc_formset/', include(books_pc_formset.urls, namespace='books_pc_formset')),
     url(r'^books_pc_formset2/', include(books_pc_formset2.urls, namespace='books_pc_formset2')),
+    url(r'^books_pc_multi_view/', include(books_pc_multi_view.urls, namespace='books_pc_multi_view')),
     url(r'^$', apps.views.home),
 ]
