@@ -1,4 +1,12 @@
-<h1>Books Parent/Child with Multi View</h1>
+{% extends "base.html" %}
+
+{% block title %}Book List{% endblock %}
+
+{% block content %}
+{% include "books_pc_multi_view/nav.html" %}
+
+Books Parent/Child with Multi View
+
 <ul>
     {% for book in books %}
     <li>{{ book.name }}  ({{ book.pages }} Pages)
@@ -10,3 +18,4 @@
 </ul>
 
 <a href="{% url 'books_pc_multi_view:book_new' %}">New</a>
+{% endblock %}

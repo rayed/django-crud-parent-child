@@ -76,6 +76,7 @@ def review_create(request, parent_pk, template_name='books_pc_multi_view/review_
         return redirect('books_pc_multi_view:book_view', parent_pk)
     ctx = {}
     ctx["form"] = form
+    ctx["book"] = book
     return render(request, template_name, ctx)
 
 def review_update(request, pk, template_name='books_pc_multi_view/review_form.html'):
@@ -87,6 +88,7 @@ def review_update(request, pk, template_name='books_pc_multi_view/review_form.ht
         return redirect('books_pc_multi_view:book_view', parent_pk)
     ctx = {}
     ctx["form"] = form
+    ctx["book"] = review.book
     return render(request, template_name, ctx)
 
 def review_delete(request, pk, template_name='books_pc_multi_view/review_confirm_delete.html'):
@@ -97,4 +99,5 @@ def review_delete(request, pk, template_name='books_pc_multi_view/review_confirm
         return redirect('books_pc_multi_view:book_view', parent_pk)
     ctx = {}
     ctx["object"] = review
+    ctx["book"] = review.book
     return render(request, template_name, ctx)

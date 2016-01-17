@@ -1,4 +1,8 @@
-<h1>{{ book.name }}</h1>
+{% extends "base.html" %}
+
+
+{% block content %}
+{% include "books_pc_multi_view/nav.html" with book=book title="View" %}
 
 Pages: {{ book.pages }}
 
@@ -16,3 +20,4 @@ Pages: {{ book.pages }}
 </ul>
 
 <a href="{% url 'books_pc_multi_view:review_new' book.id %}">New Review</a>
+{% endblock %}

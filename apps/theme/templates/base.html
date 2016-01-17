@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <title>Django CRUD: {% block title %}Welcome{% endblock %}</title>
+</head>
+
+<body>
+    <h1><a href="{% url 'home' %}">Django CRUD</a></h1>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
