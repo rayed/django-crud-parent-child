@@ -1,14 +1,18 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Django CRUD: {% block title %}Welcome{% endblock %}</title>
+    <link href="{% static 'css/style.css' %}" media="all" rel="stylesheet" />
 </head>
 
 <body>
+<div id="wrapper">
     <h1><a href="{% url 'home' %}">Django CRUD</a></h1>
 
     <div id="content">
         {% block content %}{% endblock %}
     </div>
+</div><!-- wrapper -->
 </body>
 </html>

@@ -1,0 +1,11 @@
+* {
+    font-family:arial;
+}
+a:visited {
+    color:navy;
+}
+
+#wrapper {
+    width:960px;
+    margin:auto;
+}
