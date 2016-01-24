@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include "books_pc_multi_view2/nav.html" with person=person title="Edit Person" %}
+
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

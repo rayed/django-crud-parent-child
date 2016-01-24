@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'books_pc_formset',
     'books_pc_formset2',
     'books_pc_multi_view',
+    'books_pc_multi_view2',
 ]
 
 MIDDLEWARE_CLASSES = [
