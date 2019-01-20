@@ -14,7 +14,7 @@ class Book(models.Model):
 
 
 class Review(models.Model):
-    book = models.ForeignKey(Book)
+    book = models.ForeignKey(Book,on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     review = models.TextField()
 

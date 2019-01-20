@@ -25,8 +25,8 @@ class Book(models.Model):
 
 
 class Review(models.Model):
-    book = models.ForeignKey(Book)
-    person = models.ForeignKey(Person)
+    book = models.ForeignKey(Book,on_delete=models.CASCADE)
+    person = models.ForeignKey(Person,on_delete=models.CASCADE)
     review = models.TextField()
 
     def __unicode__(self):
