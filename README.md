@@ -22,6 +22,7 @@ Install the needed Python package (only Django 1.9):
 
 Create the database:
 
+    ./manage.py makemigrations
     ./manage.py migrate
 
 Then run the server:
