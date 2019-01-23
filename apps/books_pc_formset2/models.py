@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 
 class Person(models.Model):
@@ -33,8 +33,8 @@ class Contributor(models.Model):
         (EDITOR, "EDITOR"),
         (REVIEWER, "REVIEWER"),
     )
-    book = models.ForeignKey(Book)
-    person = models.ForeignKey(Person)
+    book = models.ForeignKey(Book,on_delete=models.CASCADE)
+    person = models.ForeignKey(Person,on_delete=models.CASCADE)
     contribution = models.IntegerField(choices=CONTRIBUTION_CHOICES)
 
     def __unicode__(self):

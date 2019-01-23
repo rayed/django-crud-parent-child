@@ -1,6 +1,5 @@
 from django.db import models
-from django.core.urlresolvers import reverse
-
+from django.urls import reverse
 
 class Book(models.Model):
     name = models.CharField(max_length=200)
@@ -14,7 +13,7 @@ class Book(models.Model):
 
 
 class Tag(models.Model):
-    book = models.ForeignKey(Book)
+    book = models.ForeignKey(Book,on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     weight = models.IntegerField()
 
