@@ -1,27 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
 
-from books_pc_multi_view.models import Book, Review
-
-# ========== Forms =========
-
-class BookForm(ModelForm):
-    class Meta:
-        model = Book
-        fields = ['name', 'pages']
-
-class ReviewForm(ModelForm):
-    class Meta:
-        model = Review
-        fields = ['name', 'review']
+from .models import Book, Review
+from .forms import BookForm, ReviewForm
 
 
 # ========== Home =========
 
 def home(request, template_name='books_pc_multi_view/home.html'):
     books = Book.objects.all()
-    ctx = {}
-    ctx['books'] = books
+    ctx = {
+        'books': books,
+    }
     return render(request, template_name, ctx)
     
 
@@ -30,9 +20,10 @@ def home(request, template_name='books_pc_multi_view/home.html'):
 def book_view(request, pk, template_name='books_pc_multi_view/book_view.html'):
     book= get_object_or_404(Book, pk=pk)
     reviews = Review.objects.filter(book=book)
-    ctx = {}
-    ctx["book"] = book
-    ctx["reviews"] = reviews
+    ctx = {
+        'book': book,
+        'reviews': reviews,
+    }
     return render(request, template_name, ctx)
 
 def book_create(request, template_name='books_pc_multi_view/book_form.html'):
@@ -40,8 +31,9 @@ def book_create(request, template_name='books_pc_multi_view/book_form.html'):
     if form.is_valid():
         form.save()
         return redirect('books_pc_multi_view:home')
-    ctx = {}
-    ctx["form"] = form
+    ctx = {
+        'form': form,
+    }
     return render(request, template_name, ctx)
 
 def book_update(request, pk, template_name='books_pc_multi_view/book_form.html'):
@@ -50,9 +42,10 @@ def book_update(request, pk, template_name='books_pc_multi_view/book_form.html')
     if form.is_valid():
         form.save()
         return redirect('books_pc_multi_view:home')
-    ctx = {}
-    ctx["form"] = form
-    ctx["book"] = book
+    ctx = {
+        'form': form,
+        'book': book,
+    }
     return render(request, template_name, ctx)
 
 def book_delete(request, pk, template_name='books_pc_multi_view/book_confirm_delete.html'):
@@ -60,9 +53,10 @@ def book_delete(request, pk, template_name='books_pc_multi_view/book_confirm_del
     if request.method=='POST':
         book.delete()
         return redirect('books_pc_multi_view:home')
-    ctx = {}
-    ctx["object"] = book
-    ctx["book"] = book
+    ctx = {
+        'object': book,
+        'book': book,
+    }
     return render(request, template_name, ctx)
 
 
@@ -76,9 +70,10 @@ def review_create(request, parent_pk, template_name='books_pc_multi_view/review_
         review.book = book
         review.save()
         return redirect('books_pc_multi_view:book_view', parent_pk)
-    ctx = {}
-    ctx["form"] = form
-    ctx["book"] = book
+    ctx = {
+        'form': form,
+        'book': book,
+    }
     return render(request, template_name, ctx)
 
 def review_update(request, pk, template_name='books_pc_multi_view/review_form.html'):
@@ -88,9 +83,10 @@ def review_update(request, pk, template_name='books_pc_multi_view/review_form.ht
     if form.is_valid():
         form.save()
         return redirect('books_pc_multi_view:book_view', parent_pk)
-    ctx = {}
-    ctx["form"] = form
-    ctx["book"] = review.book
+    ctx = {
+        'form': form,
+        'book': review.book,
+    }
     return render(request, template_name, ctx)
 
 def review_delete(request, pk, template_name='books_pc_multi_view/review_confirm_delete.html'):
@@ -99,7 +95,8 @@ def review_delete(request, pk, template_name='books_pc_multi_view/review_confirm
     if request.method=='POST':
         review.delete()
         return redirect('books_pc_multi_view:book_view', parent_pk)
-    ctx = {}
-    ctx["object"] = review
-    ctx["book"] = review.book
+    ctx = {
+        'object': review,
+        'book': review.book,
+    }
     return render(request, template_name, ctx)

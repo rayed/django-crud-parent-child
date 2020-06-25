@@ -1,29 +1,20 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.forms import ModelForm
 from django.forms.models import inlineformset_factory
 
-from books_pc_formset2.models import Book, Contributor, Person
+from .models import Book, Contributor, Person
+from .forms import BookForm, PersonForm
 
-# ============ Forms ===============
 
-class BookForm(ModelForm):
-    class Meta:
-        model = Book
-        fields = ['name', 'pages']
-
-class PersonForm(ModelForm):
-    class Meta:
-        model = Person
-        fields = ['name', 'email']
 
 # ============ Home ===============
 
 def home(request, template_name='books_pc_formset2/home.html'):
     books = Book.objects.all()
     persons = Person.objects.all()
-    ctx = {}
-    ctx['books'] = books
-    ctx['persons'] = persons
+    ctx = {
+        'books': books,
+        'persons': persons,
+    }
     return render(request, template_name, ctx)
 
 
@@ -38,9 +29,10 @@ def book_create(request, template_name='books_pc_formset2/book_form.html'):
         formset.instance = book
         formset.save()
         return redirect('books_pc_formset2:home')
-    ctx = {}
-    ctx["form"] = form
-    ctx["formset"] = formset
+    ctx = {
+        'form': form,
+        'formset': formset,
+    }
     return render(request, template_name, ctx)
 
 def book_update(request, pk, template_name='books_pc_formset2/book_form.html'):
@@ -53,9 +45,10 @@ def book_update(request, pk, template_name='books_pc_formset2/book_form.html'):
         formset.instance = book
         formset.save()
         return redirect('books_pc_formset2:home')
-    ctx = {}
-    ctx["form"] = form
-    ctx["formset"] = formset
+    ctx = {
+        'form': form,
+        'formset': formset,
+    }
     return render(request, template_name, ctx)
 
 def book_delete(request, pk, template_name='books_pc_formset2/book_confirm_delete.html'):
@@ -63,8 +56,9 @@ def book_delete(request, pk, template_name='books_pc_formset2/book_confirm_delet
     if request.method=='POST':
         book.delete()
         return redirect('books_pc_formset2:home')
-    ctx = {}
-    ctx["book"] = book
+    ctx = {
+        'book': book,
+    }
     return render(request, template_name, ctx)
 
 
@@ -75,8 +69,9 @@ def person_create(request, template_name='books_pc_formset2/person_form.html'):
     if form.is_valid():
         form.save()
         return redirect('books_pc_formset2:home')
-    ctx = {}
-    ctx["form"] = form
+    ctx = {
+        'form': form,
+    }
     return render(request, template_name, ctx)
 
 def person_update(request, pk, template_name='books_pc_formset2/person_form.html'):
@@ -85,8 +80,9 @@ def person_update(request, pk, template_name='books_pc_formset2/person_form.html
     if form.is_valid():
         form.save()
         return redirect('books_pc_formset2:home')
-    ctx = {}
-    ctx["form"] = form
+    ctx = {
+        'form': form,
+    }
     return render(request, template_name, ctx)
 
 def person_delete(request, pk, template_name='books_pc_formset2/person_confirm_delete.html'):
@@ -94,6 +90,7 @@ def person_delete(request, pk, template_name='books_pc_formset2/person_confirm_d
     if request.method=='POST':
         person.delete()
         return redirect('books_pc_formset2:home')
-    ctx = {}
-    ctx["person"] = person
+    ctx = {
+        'person': person,
+    }
     return render(request, template_name, ctx)

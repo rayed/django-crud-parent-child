@@ -1,18 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.forms import ModelForm
 from django.forms.models import inlineformset_factory
 
-from books_pc_formset.models import Book, Tag
+from .models import Book, Tag
+from .forms import BookForm
 
-class BookForm(ModelForm):
-    class Meta:
-        model = Book
-        fields = ['name', 'pages']
 
 def home(request, template_name='books_pc_formset/home.html'):
     books = Book.objects.all()
-    ctx = {}
-    ctx['books'] = books
+    ctx = {
+        'books': books,
+    }
     return render(request, template_name, ctx)
 
 def book_create(request, template_name='books_pc_formset/book_form.html'):
@@ -24,9 +21,10 @@ def book_create(request, template_name='books_pc_formset/book_form.html'):
         formset.instance = book
         formset.save()
         return redirect('books_pc_formset:home')
-    ctx = {}
-    ctx['form'] = form
-    ctx['formset'] = formset
+    ctx = {
+        'form': form,
+        'formset': formset,
+    }
     return render(request, template_name, ctx)
 
 def book_update(request, pk, template_name='books_pc_formset/book_form.html'):
@@ -39,9 +37,10 @@ def book_update(request, pk, template_name='books_pc_formset/book_form.html'):
         formset.instance = book
         formset.save()
         return redirect('books_pc_formset:home')
-    ctx = {}
-    ctx['form'] = form
-    ctx['formset'] = formset
+    ctx = {
+        'form': form,
+        'formset': formset,
+    }
     return render(request, template_name, ctx)
 
 def book_delete(request, pk, template_name='books_pc_formset/book_confirm_delete.html'):
@@ -49,6 +48,7 @@ def book_delete(request, pk, template_name='books_pc_formset/book_confirm_delete
     if request.method=='POST':
         book.delete()
         return redirect('books_pc_formset:home')
-    ctx = {}
-    ctx['book'] = book
+    ctx = {
+        'book': book,
+    }
     return render(request, template_name, ctx)

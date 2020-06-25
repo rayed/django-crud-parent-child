@@ -1,20 +1,30 @@
-from django.conf.urls import url
-from django.urls import path, include
+"""apps URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/2.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
 from django.contrib import admin
+from django.urls import path, include
 
 import theme.views
-import books_simple.urls
-import books_pc_formset.urls
-import books_pc_formset2.urls
-import books_pc_multi_view.urls
-import books_pc_multi_view2.urls
 
 urlpatterns = [
-    url(r'^$', theme.views.home, name='home'),
-    url(r'^books_simple/', include((books_simple.urls, 'books_simple'), namespace='books_simple')),
-    url(r'^books_pc_formset/', include((books_pc_formset.urls, 'books_pc_formset'), namespace='books_pc_formset')),
-    url(r'^books_pc_formset2/', include((books_pc_formset2.urls, 'books_pc_formset2'), namespace='books_pc_formset2')),
-    url(r'^books_pc_multi_view/', include((books_pc_multi_view.urls, 'books_pc_multi_view'), namespace='books_pc_multi_view')),
-    url(r'^books_pc_multi_view2/', include((books_pc_multi_view2.urls, 'books_pc_multi_view2'), namespace='books_pc_multi_view2')),
     path('admin/', admin.site.urls),
+
+    path('', theme.views.home, name='home'),
+    path('books_simple/', include('books_simple.urls')),
+    path('books_pc_formset/', include('books_pc_formset.urls')),
+    path('books_pc_formset2/', include('books_pc_formset2.urls')),
+    path('books_pc_multi_view/', include('books_pc_multi_view.urls')),
+    path('books_pc_multi_view2/', include('books_pc_multi_view2.urls')),
 ]

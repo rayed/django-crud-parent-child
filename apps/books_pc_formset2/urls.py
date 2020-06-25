@@ -1,15 +1,17 @@
-from django.conf.urls import url
+from django.urls import path
 
-from books_pc_formset2 import views
+from . import views
+
+app_name = 'books_pc_formset2'
 
 urlpatterns = [
-  url(r'^$', views.home, name='home'),
+    path('', views.home, name='home'),
 
-  url(r'^person_new$', views.person_create, name='person_new'),
-  url(r'^person_edit/(?P<pk>\d+)$', views.person_update, name='person_edit'),
-  url(r'^person_delete/(?P<pk>\d+)$', views.person_delete, name='person_delete'),
+    path('person_new', views.person_create, name='person_new'),
+    path('person_edit/<int:pk>', views.person_update, name='person_edit'),
+    path('person_delete/<int:pk>', views.person_delete, name='person_delete'),
 
-  url(r'^book_new$', views.book_create, name='book_new'),
-  url(r'^book_edit/(?P<pk>\d+)$', views.book_update, name='book_edit'),
-  url(r'^book_delete/(?P<pk>\d+)$', views.book_delete, name='book_delete'),
+    path('book_new', views.book_create, name='book_new'),
+    path('book_edit/<int:pk>', views.book_update, name='book_edit'),
+    path('book_delete/<int:pk>', views.book_delete, name='book_delete'),
 ]

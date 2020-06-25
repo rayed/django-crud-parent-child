@@ -1,6 +1,9 @@
 * {
     font-family:arial;
 }
+pre {
+    font-family:'Courier New', Courier, monospace;
+}
 a:visited {
     color:navy;
 }

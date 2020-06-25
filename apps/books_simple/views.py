@@ -1,17 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.forms import ModelForm
 
-from books_simple.models import Book
-
-class BookForm(ModelForm):
-    class Meta:
-        model = Book
-        fields = ['name', 'pages']
+from .models import Book
+from .forms import BookForm
 
 def home(request, template_name='books_simple/home.html'):
     books = Book.objects.all()
-    ctx = {}
-    ctx['books'] = books
+    ctx = {
+        'books': books,
+    }
     return render(request, template_name, ctx)
 
 def book_create(request, template_name='books_simple/book_form.html'):
@@ -19,8 +15,9 @@ def book_create(request, template_name='books_simple/book_form.html'):
     if form.is_valid():
         form.save()
         return redirect('books_simple:home')
-    ctx = {}
-    ctx['form'] = form
+    ctx = {
+        'form': form,
+    }
     return render(request, template_name, ctx)
 
 def book_update(request, pk, template_name='books_simple/book_form.html'):
@@ -29,9 +26,10 @@ def book_update(request, pk, template_name='books_simple/book_form.html'):
     if form.is_valid():
         form.save()
         return redirect('books_simple:home')
-    ctx = {}
-    ctx['form'] = form
-    ctx['book'] = book
+    ctx = {
+        'form': form,
+        'book': book,
+    }
     return render(request, template_name, ctx)
 
 def book_delete(request, pk, template_name='books_simple/book_confirm_delete.html'):
@@ -39,6 +37,7 @@ def book_delete(request, pk, template_name='books_simple/book_confirm_delete.htm
     if request.method=='POST':
         book.delete()
         return redirect('books_simple:home')
-    ctx = {}
-    ctx['book'] = book
+    ctx = {
+        'book': book,
+    }
     return render(request, template_name, ctx)
